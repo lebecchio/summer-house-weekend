@@ -217,6 +217,80 @@
   }
   footer p { color: var(--ink-soft); margin: 0.5rem 0 0; }
 
+  /* ---------- Where ---------- */
+  .where-grid {
+    display: grid;
+    gap: clamp(1.5rem, 4vw, 2.5rem);
+    align-items: center;
+  }
+  @media (min-width: 760px) {
+    .where-grid { grid-template-columns: 1.1fr 0.9fr; }
+  }
+  .addr {
+    font-family: "Fraunces", serif;
+    font-size: clamp(1.6rem, 1.1rem + 2vw, 2.6rem);
+    line-height: 1.1;
+    margin: 0 0 1.4rem;
+  }
+  .addr span { display: block; color: var(--ink-soft); font-size: 0.62em; font-weight: 400; }
+  .maplink {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-family: "Fraunces", serif;
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--shell);
+    background: var(--sea);
+    padding: 0.7rem 1.3rem;
+    border-radius: 999px;
+    transition: transform 0.25s cubic-bezier(0.16,1,0.3,1), background 0.25s;
+  }
+  .maplink:hover { transform: translateY(-2px); background: var(--ink); }
+  .mapframe {
+    border: 1px solid var(--line);
+    border-radius: 1.2rem;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    box-shadow: 0 18px 40px -28px rgba(36,58,69,0.6);
+  }
+  .mapframe iframe { width: 100%; height: 100%; border: 0; display: block; filter: saturate(0.92); }
+
+  /* ---------- Weather ---------- */
+  .forecast {
+    display: grid;
+    gap: clamp(0.8rem, 2vw, 1.2rem);
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @media (max-width: 560px) { .forecast { grid-template-columns: 1fr; } }
+  .wcard {
+    background: linear-gradient(180deg, var(--shell), var(--sand-deep));
+    border: 1px solid var(--line);
+    border-radius: 1.2rem;
+    padding: clamp(1.2rem, 3vw, 1.8rem);
+    text-align: left;
+  }
+  .wcard .wday {
+    font-family: "Fraunces", serif;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 0.78rem;
+    color: var(--sea);
+    font-weight: 600;
+  }
+  .wcard .wicon { font-size: clamp(2.4rem, 1.8rem + 2vw, 3.2rem); line-height: 1; margin: 0.4rem 0 0.5rem; }
+  .wcard .wtemp {
+    font-family: "Fraunces", serif;
+    font-size: clamp(1.7rem, 1.3rem + 1.4vw, 2.3rem);
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .wcard .wtemp .lo { color: var(--ink-soft); font-weight: 400; font-size: 0.7em; }
+  .wcard .wdesc { color: var(--ink-soft); margin: 0.3rem 0 0.8rem; min-height: 1.5em; }
+  .wcard .wmeta { font-size: 0.9rem; color: var(--ink-soft); display: flex; gap: 1.1rem; }
+  .wcard .wmeta b { color: var(--sea); font-weight: 600; }
+  .wstatus { color: var(--ink-soft); font-style: italic; }
+
   /* ---------- Entrance ---------- */
   @media (prefers-reduced-motion: no-preference) {
     .reveal { opacity: 0; transform: translateY(1.2rem); animation: rise 0.9s cubic-bezier(0.16,1,0.3,1) forwards; }
@@ -304,12 +378,79 @@
       </div>
     </div>
   </section>
+  <section class="wrap">
+    <p class="kicker">Where</p>
+    <div class="where-grid">
+      <div>
+        <p class="addr">Egevej 23 <span>4550 Asnæs · Odsherred, Denmark</span></p>
+        <a class="maplink" href="https://maps.app.goo.gl/F2CvFrh7dpMLmXq38" target="_blank" rel="noopener">Open in Maps →</a>
+      </div>
+      <div class="mapframe">
+        <iframe
+          title="Map to Egevej 23, Asnæs"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.openstreetmap.org/export/embed.html?bbox=11.470%2C55.835%2C11.525%2C55.856&layer=mapnik&marker=55.8451797%2C11.4974364"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <p class="kicker">Forecast</p>
+    <h2>How's the weather looking?</h2>
+    <p class="lede" style="margin-bottom:1.8rem">Updated live for Asnæs — it gets more reliable the closer we get.</p>
+    <div class="forecast" id="forecast">
+      <p class="wstatus" id="wstatus">Checking the skies…</p>
+    </div>
+  </section>
+
 </main>
 
 <footer>
   <p class="mark">See you by the water.</p>
   <p>Fri 26 – Sun 28 June 2026</p>
 </footer>
+
+<script>
+  (function () {
+    var DAYS = { "2026-06-26": "Fri", "2026-06-27": "Sat", "2026-06-28": "Sun" };
+    function describe(code) {
+      if (code === 0) return ["☀️", "Clear sky"];
+      if (code === 1) return ["🌤️", "Mainly clear"];
+      if (code === 2) return ["⛅", "Partly cloudy"];
+      if (code === 3) return ["☁️", "Overcast"];
+      if (code === 45 || code === 48) return ["🌫️", "Foggy"];
+      if (code >= 51 && code <= 57) return ["🌦️", "Drizzle"];
+      if (code >= 61 && code <= 67) return ["🌧️", "Rain"];
+      if (code >= 71 && code <= 77) return ["❄️", "Snow"];
+      if (code >= 80 && code <= 82) return ["🌦️", "Rain showers"];
+      if (code >= 95) return ["⛈️", "Thunderstorm"];
+      return ["🌡️", "Mixed"];
+    }
+    var url = "https://api.open-meteo.com/v1/forecast?latitude=55.845&longitude=11.497"
+      + "&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,wind_speed_10m_max"
+      + "&timezone=Europe%2FCopenhagen&start_date=2026-06-26&end_date=2026-06-28";
+    var box = document.getElementById("forecast");
+    fetch(url).then(function (r) { return r.json(); }).then(function (d) {
+      var t = d.daily.time, html = "";
+      for (var i = 0; i < t.length; i++) {
+        var info = describe(d.daily.weather_code[i]);
+        html += '<div class="wcard">'
+          + '<div class="wday">' + (DAYS[t[i]] || t[i]) + '</div>'
+          + '<div class="wicon">' + info[0] + '</div>'
+          + '<div class="wtemp">' + Math.round(d.daily.temperature_2m_max[i]) + '°'
+          + ' <span class="lo">/ ' + Math.round(d.daily.temperature_2m_min[i]) + '°</span></div>'
+          + '<p class="wdesc">' + info[1] + '</p>'
+          + '<div class="wmeta"><span>💧 <b>' + (d.daily.precipitation_probability_max[i] || 0) + '%</b></span>'
+          + '<span>💨 <b>' + Math.round(d.daily.wind_speed_10m_max[i]) + '</b> km/h</span></div>'
+          + '</div>';
+      }
+      box.innerHTML = html;
+    }).catch(function () {
+      box.innerHTML = '<p class="wstatus">Couldn’t load the forecast right now — check back later.</p>';
+    });
+  })();
+</script>
 
 </body>
 </html>
