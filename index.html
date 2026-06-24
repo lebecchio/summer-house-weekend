@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Summer House Weekend · 26–28 June</title>
+<meta name="description" content="Everything you need to know for our weekend at the summer house, 26–28 June." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --sand: #f4ecdc;
+    --sand-deep: #ece0c8;
+    --ink: #243a45;
+    --ink-soft: #4a6470;
+    --sea: #2b6e7f;
+    --sun: #d9763c;
+    --sun-soft: #e89a5f;
+    --shell: #fbf6ec;
+    --line: #d8cbb0;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--sand);
+    color: var(--ink);
+    font-family: "Newsreader", Georgia, serif;
+    font-size: clamp(1.05rem, 0.95rem + 0.4vw, 1.2rem);
+    line-height: 1.65;
+    font-optical-sizing: auto;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection { background: var(--sun); color: var(--shell); }
+
+  .wrap { width: min(1080px, 90vw); margin-inline: auto; }
+
+  /* ---------- Hero ---------- */
+  header.hero {
+    position: relative;
+    overflow: hidden;
+    padding-block: clamp(3rem, 8vh, 6rem) clamp(4rem, 10vh, 7rem);
+    background:
+      radial-gradient(120% 90% at 80% -10%, var(--sun-soft) 0%, transparent 45%),
+      linear-gradient(180deg, var(--sand-deep), var(--sand));
+  }
+
+  .sun {
+    position: absolute;
+    top: clamp(-6rem, -8vw, -3rem);
+    right: clamp(-6rem, -6vw, -2rem);
+    width: clamp(14rem, 30vw, 26rem);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(circle at 50% 50%, var(--sun) 0%, var(--sun-soft) 60%, transparent 72%);
+    opacity: 0.85;
+    filter: blur(2px);
+    pointer-events: none;
+  }
+
+  .eyebrow {
+    font-family: "Newsreader", serif;
+    font-style: italic;
+    letter-spacing: 0.02em;
+    color: var(--sea);
+    font-size: clamp(1rem, 0.9rem + 0.4vw, 1.3rem);
+    margin: 0 0 0.6rem;
+  }
+
+  h1 {
+    font-family: "Fraunces", serif;
+    font-weight: 600;
+    font-size: clamp(3.2rem, 2rem + 7vw, 7.5rem);
+    line-height: 0.92;
+    letter-spacing: -0.02em;
+    margin: 0;
+    color: var(--ink);
+  }
+  h1 em { font-style: italic; color: var(--sea); font-weight: 500; }
+
+  .dateline {
+    margin-top: clamp(1.5rem, 4vh, 2.5rem);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.5rem 1.4rem;
+    font-family: "Fraunces", serif;
+    font-size: clamp(1.1rem, 0.9rem + 0.8vw, 1.6rem);
+    color: var(--ink-soft);
+  }
+  .dateline strong { color: var(--ink); font-weight: 600; }
+  .dot { color: var(--sun); font-weight: 700; }
+
+  /* ---------- Sections ---------- */
+  section { padding-block: clamp(3rem, 8vh, 5.5rem); }
+
+  .kicker {
+    font-family: "Fraunces", serif;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--sun);
+    margin: 0 0 0.8rem;
+  }
+
+  h2 {
+    font-family: "Fraunces", serif;
+    font-weight: 500;
+    font-size: clamp(2rem, 1.4rem + 2.6vw, 3.4rem);
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+    margin: 0 0 1.5rem;
+  }
+
+  .lede { max-width: 46ch; color: var(--ink-soft); font-size: 1.15em; }
+
+  /* ---------- Schedule ---------- */
+  .schedule { border-top: 1px solid var(--line); }
+  .day {
+    display: grid;
+    grid-template-columns: minmax(0, 7rem) 1fr;
+    gap: clamp(1rem, 4vw, 3rem);
+    padding-block: clamp(1.6rem, 4vh, 2.4rem);
+    border-bottom: 1px solid var(--line);
+    align-items: baseline;
+  }
+  .day .when {
+    font-family: "Fraunces", serif;
+    font-weight: 600;
+    line-height: 1;
+  }
+  .day .when .num {
+    display: block;
+    font-size: clamp(2.4rem, 1.6rem + 3vw, 3.6rem);
+    color: var(--sea);
+  }
+  .day .when .lbl {
+    font-size: 0.85rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .day .what h3 {
+    font-family: "Fraunces", serif;
+    font-weight: 600;
+    font-size: clamp(1.3rem, 1rem + 1vw, 1.8rem);
+    margin: 0 0 0.4rem;
+  }
+  .day .what p { margin: 0; color: var(--ink-soft); max-width: 52ch; }
+
+  /* ---------- Packing ---------- */
+  .pack {
+    background:
+      linear-gradient(180deg, var(--shell), var(--sand-deep));
+    border-radius: 1.5rem;
+    padding: clamp(2rem, 5vw, 3.5rem);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(2rem, 5vw, 3.5rem);
+  }
+  @media (min-width: 760px) {
+    .pack { grid-template-columns: 1fr 1fr; }
+  }
+
+  .pack h3 {
+    font-family: "Fraunces", serif;
+    font-size: 1.5rem;
+    margin: 0 0 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .pack ul { list-style: none; margin: 0; padding: 0; }
+  .pack li {
+    padding: 0.55rem 0 0.55rem 2rem;
+    position: relative;
+    border-bottom: 1px dashed var(--line);
+  }
+  .pack li:last-child { border-bottom: none; }
+
+  .bring li::before {
+    content: "✓";
+    position: absolute; left: 0; top: 0.55rem;
+    color: var(--sea); font-weight: 700;
+  }
+  .skip li::before {
+    content: "✕";
+    position: absolute; left: 0; top: 0.55rem;
+    color: var(--sun); font-weight: 700;
+  }
+  .skip { position: relative; }
+
+  .note {
+    margin-top: 1.1rem;
+    font-style: italic;
+    color: var(--ink-soft);
+    font-size: 0.98em;
+  }
+
+  /* ---------- Footer ---------- */
+  footer {
+    text-align: center;
+    padding-block: clamp(3rem, 8vh, 5rem);
+    border-top: 1px solid var(--line);
+  }
+  footer .mark {
+    font-family: "Fraunces", serif;
+    font-style: italic;
+    font-size: clamp(1.4rem, 1rem + 2vw, 2.2rem);
+    color: var(--sea);
+  }
+  footer p { color: var(--ink-soft); margin: 0.5rem 0 0; }
+
+  /* ---------- Entrance ---------- */
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal { opacity: 0; transform: translateY(1.2rem); animation: rise 0.9s cubic-bezier(0.16,1,0.3,1) forwards; }
+    .reveal.d1 { animation-delay: 0.05s; }
+    .reveal.d2 { animation-delay: 0.18s; }
+    .reveal.d3 { animation-delay: 0.32s; }
+    @keyframes rise { to { opacity: 1; transform: none; } }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="sun" aria-hidden="true"></div>
+  <div class="wrap">
+    <p class="eyebrow reveal d1">A little weekend by the water</p>
+    <h1 class="reveal d2">The Summer<br />House <em>Weekend</em></h1>
+    <div class="dateline reveal d3">
+      <span><strong>Fri 26</strong> June</span>
+      <span class="dot">→</span>
+      <span><strong>Sun 28</strong> June</span>
+      <span class="dot">·</span>
+      <span>2026</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="wrap">
+    <p class="kicker">The plan</p>
+    <h2>Two slow nights, one bright weekend.</h2>
+    <p class="lede">We drive out Friday, settle in, and let the weekend do the rest — swimming, eating, doing very little of importance. Home again Sunday.</p>
+  </section>
+
+  <section class="wrap">
+    <p class="kicker">Itinerary</p>
+    <div class="schedule">
+      <div class="day">
+        <div class="when"><span class="num">26</span><span class="lbl">Fri</span></div>
+        <div class="what">
+          <h3>Arrival &amp; settling in</h3>
+          <p>Head out in the afternoon, claim a room, and ease into the weekend. Dinner together once everyone's landed.</p>
+        </div>
+      </div>
+      <div class="day">
+        <div class="when"><span class="num">27</span><span class="lbl">Sat</span></div>
+        <div class="what">
+          <h3>The full summer day</h3>
+          <p>Swimming, sun, and long lazy meals. Bring your trunks — the water is the whole point. Nothing scheduled, everything possible.</p>
+        </div>
+      </div>
+      <div class="day">
+        <div class="when"><span class="num">28</span><span class="lbl">Sun</span></div>
+        <div class="what">
+          <h3>Tidy up &amp; head home</h3>
+          <p>A slow morning, pack up, leave the place as we found it, and drive home in the afternoon.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <p class="kicker">Packing</p>
+    <h2>What to bring — and what to leave home.</h2>
+    <div class="pack">
+      <div class="bring">
+        <h3>Bring this 🩳</h3>
+        <ul>
+          <li>Swimming clothes</li>
+          <li>A towel for the water</li>
+          <li>Sunscreen &amp; sunglasses</li>
+          <li>Comfy clothes for two nights</li>
+          <li>Good shoes for a walk</li>
+          <li>A drink or snack to share</li>
+        </ul>
+      </div>
+      <div class="skip">
+        <h3>Leave at home 🛏️</h3>
+        <ul>
+          <li>Bed linen — it's already there</li>
+          <li>Pillows &amp; duvets — provided</li>
+          <li>Anything you don't want to carry</li>
+        </ul>
+        <p class="note">Linen is sorted at the house, so don't pack any. Just bring yourself and your swimsuit.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p class="mark">See you by the water.</p>
+  <p>Fri 26 – Sun 28 June 2026</p>
+</footer>
+
+</body>
+</html>
